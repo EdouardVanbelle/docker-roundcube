@@ -1,0 +1,6 @@
+#!/bin/bash
+
+CMD="docker run -t -i -h roundcube -p 443:443 -p 80:80 -v /home/mail-data:/data roundcube"
+
+echo $CMD "$@"
+exec $CMD "$@"
