@@ -95,7 +95,8 @@ $config['product_name'] = 'RC Mail';
 $config['plugins'] = array(
     'archive',
     'zipdownload',
-    'markasjunk'
+    'markasjunk',
+    'managesieve'
 );
 
 // the default locale setting (leave empty for auto-detection)
