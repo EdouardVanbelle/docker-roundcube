@@ -25,11 +25,12 @@ RUN \
     mkdir -p /data/logs/roundcube && \
     mkdir -p /data/cache/roundcube 
 
-ADD nginx.conf     		/etc/nginx/sites-enabled/default
+ADD conf/nginx.conf     		     /etc/nginx/sites-enabled/default
 # TODO: could configure php-fpm roundcube pool
-ADD config.inc.php 		/home/roundcube/config/config.inc.php
-ADD managesieve.config.inc.php 	/home/roundcube/plugins/managesieve/config.inc.php
-ADD start.sh       		/start.sh
+ADD conf/config.inc.php 		     /home/roundcube/config/config.inc.php
+ADD conf/managesieve.config.inc.php 	     /home/roundcube/plugins/managesieve/config.inc.php
+ADD conf/newmail_notifier.config.inc.php     /home/roundcube/plugins/newmail_notifier/config.inc.php
+ADD start.sh       		     /start.sh
 
 VOLUME /data
 
