@@ -98,7 +98,8 @@ $config['plugins'] = array(
     'markasjunk',
     'managesieve',
     'newmail_notifier',
-    'attachment_reminder'
+    'attachment_reminder',
+    'zipdownload'
 );
 
 // the default locale setting (leave empty for auto-detection)
