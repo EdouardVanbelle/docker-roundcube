@@ -7,6 +7,12 @@ set -eux
 mkdir -p /data/cache/roundcube
 mkdir -p /data/log/roundcube
 
+if [ ! -e /data/config/ssl/default.pem ]
+then
+	echo please provide in data:/config/ssl/default.pem + default.key
+	exit 1
+fi
+
 chown -R www-data: /data/cache/roundcube /data/log/roundcube
 
 HASH=$(cat /dev/urandom | tr -dc 'a-f0-9' | fold -w 48 | head -n 1) 
