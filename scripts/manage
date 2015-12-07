@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [ ! -e /etc/in-docker ]
+then
+        echo "This script must be runned under a container" >&2
+        exit 1
+fi
+
+if [ \( "$1" == "_run" \) -a \( ${#@} -gt 1 \) ]
+then
+        # parameters used from docker
+        shift
+fi
+
+_init()
+{
+	# make sure the dirs are there
+	mkdir -p /data/cache/roundcube
+	mkdir -p /data/log/roundcube
+
+	if [ ! -e /data/config/ssl/default.pem ]
+	then
+		echo please provide in data:/config/ssl/default.pem + default.key
+		exit 1
+	fi
+
+	chown -R www-data: /data/cache/roundcube /data/log/roundcube
+
+	HASH=$( tr -dc 'a-f0-9' </dev/urandom | head -c${1:-48})
+	sed -i "s/{{RANDOM_KEY}}/${HASH}/g" /home/roundcube/config/config.inc.php
+
+	service nginx    start
+	service php5-fpm start
+
+	echo nginx php5-fpm started
+}
+
+_run()
+{
+        _init
+	tail -F  /data/log/roundcube/*
+}
+
+shell()
+{
+        _init
+        exec /bin/bash
+}
+
+VERB=$1
+shift
+
+case $VERB in
+	_run|shell)
+		$VERB
+		;;
+	*)
+		echo "usage: $0 shell"
+		;;
+esac
+
+

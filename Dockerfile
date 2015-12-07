@@ -23,7 +23,8 @@ RUN \
     rm -fr /home/roundcube/installer && \
     chown -R root: /home/roundcube && \ 
     mkdir -p /data/logs/roundcube && \
-    mkdir -p /data/cache/roundcube 
+    mkdir -p /data/cache/roundcube && \
+    touch /etc/in-docker
 
 ADD conf/nginx.conf     		     /etc/nginx/sites-enabled/default
 # TODO: could configure php-fpm roundcube pool
@@ -34,11 +35,10 @@ ADD plugins/message_label/		     /home/roundcube/plugins/message_label/
 
 ADD conf/config.inc.php 		     /home/roundcube/config/config.inc.php
 
-
-ADD start.sh       		     /start.sh
+ADD scripts/manage       		     /usr/local/bin/manage
 
 VOLUME /data
 
 EXPOSE 80 443
 
-CMD [ "bash", "/start.sh" ]
+ENTRYPOINT [ "/usr/local/bin/manage", "_run" ]
