@@ -99,7 +99,8 @@ $config['plugins'] = array(
     'managesieve',
     'newmail_notifier',
     'attachment_reminder',
-    'zipdownload'
+    'zipdownload',
+    'message_label'
 );
 
 // the default locale setting (leave empty for auto-detection)

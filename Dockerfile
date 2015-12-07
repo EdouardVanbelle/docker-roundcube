@@ -27,10 +27,13 @@ RUN \
 
 ADD conf/nginx.conf     		     /etc/nginx/sites-enabled/default
 # TODO: could configure php-fpm roundcube pool
-ADD conf/config.inc.php 		     /home/roundcube/config/config.inc.php
 ADD conf/managesieve.config.inc.php 	     /home/roundcube/plugins/managesieve/config.inc.php
 ADD conf/newmail_notifier.config.inc.php     /home/roundcube/plugins/newmail_notifier/config.inc.php
 ADD conf/zipdownload.config.inc.php	     /home/roundcube/plugins/zipdownload/config.inc.php
+ADD plugins/message_label/		     /home/roundcube/plugins/message_label/
+
+ADD conf/config.inc.php 		     /home/roundcube/config/config.inc.php
+
 
 ADD start.sh       		     /start.sh
 
