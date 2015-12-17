@@ -8,7 +8,7 @@ RUN \
 	    nginx php5-fpm nano wget sqlite3 procps \
 	    php5-mcrypt php5-intl php5-sqlite php-pear \
 	    php-net-smtp php-mail-mime \
-            ca-certificates \
+            ca-certificates openssl \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 

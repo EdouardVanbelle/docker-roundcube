@@ -18,16 +18,31 @@ _init()
 	mkdir -p /data/cache/roundcube
 	mkdir -p /data/log/roundcube
 
+	if [ ! -e /data/config/hostname ]
+	then
+		echo "please define hostname (IMAP, SUBMISSION, SIEVE servers) in /data/config/hostname"
+		exit 1
+	fi
+
 	if [ ! -e /data/config/ssl/default.pem ]
 	then
 		echo please provide in data:/config/ssl/default.pem + default.key
 		exit 1
 	fi
 
+	SERVER_HOSTNAME=$(cat /data/config/hostname)
+	CERT_HOSTNAME=$(openssl x509 -noout -in /data/config/ssl/default.pem -subject | sed 's/.*\/CN=//; s/\/.*//;')
+
+	if [ "$CERT_HOSTNAME" != "$SERVER_HOSTNAME" ]
+	then
+		echo "WARNING: /data/config/ssl/default.pem belongs to $CERT_HOSTNAME, which differs from $SERVER_HOSTNAME"
+	fi
+
 	chown -R www-data: /data/cache/roundcube /data/log/roundcube
 
 	HASH=$( tr -dc 'a-f0-9' </dev/urandom | head -c${1:-48})
-	sed -i "s/{{RANDOM_KEY}}/${HASH}/g" /home/roundcube/config/config.inc.php
+	sed -i "s/{{RANDOM_KEY}}/${HASH}/g"          /home/roundcube/config/config.inc.php
+	sed -i "s/{{HOSTNAME}}/${SERVER_HOSTNAME}/g" /home/roundcube/config/config.inc.php
 
 	service nginx    start
 	service php5-fpm start
@@ -44,6 +59,8 @@ _run()
 shell()
 {
         _init
+        debian_chroot=DOCKER
+        export debian_chroot
         exec /bin/bash
 }
 
