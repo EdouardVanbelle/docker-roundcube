@@ -3,3 +3,10 @@ check plugins from:
 
 	rcguard: https://github.com/dennylin93/rcguard/archive/0.5.0.tar.gz
 
+change php running user (must be different from www-data) + grown up number of php workers
+
+could whitelist known users using:
+
+	sqlite3 /data/cache/roundcube/db.sqlite 'SELECT email FROM contacts WHERE email != "";' | tr ',' '\n/'
+
+
