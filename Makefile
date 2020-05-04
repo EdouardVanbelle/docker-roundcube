@@ -1,12 +1,25 @@
 DOCKER=roundcube
+LOCAL=/home
+INSTANCE="${DOCKER}-instance"
 
 all: build
 
-.PHONY: build run
+.PHONY: build container start stop enter
 
+# build image
 build:
 	docker build -t dropz-one/${DOCKER} .
 
-run: 
-	docker run -t -i -h roundcube -p 80:80 -p 443:443 -v /home/mail-data:/data dropz-one/${DOCKER}
+#create container
+container: 
+	docker run -t -d -h ${DOCKER} --name "${INSTANCE}" -p 80:80 -p 443:443 -v ${LOCAL}/mail-data:/data dropz-one/${DOCKER}
+
+start:
+	docker start ${INSTANCE}
+stop:
+	docker stop ${INSTANCE}
+
+enter:
+	docker exec -t -i ${INSTANCE} /bin/bash
+
 
