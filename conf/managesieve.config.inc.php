@@ -91,11 +91,20 @@ $config['managesieve_filename_exceptions'] = array();
 // If not empty, user will need to select domain from a list
 $config['managesieve_domains'] = array();
 
+// Default list of entries in header selector
+$config['managesieve_default_headers'] = array('Subject', 'From', 'To');
+
 // Enables separate management interface for vacation responses (out-of-office)
 // 0 - no separate section (default),
 // 1 - add Vacation section,
 // 2 - add Vacation section, but hide Filters section
 $config['managesieve_vacation'] = 0;
+
+// Enables separate management interface for setting forwards (redirect to and copy to)
+// 0 - no separate section (default),
+// 1 - add Forward section,
+// 2 - add Forward section, but hide Filters section
+$config['managesieve_forward'] = 0;
 
 // Default vacation interval (in days).
 // Note: If server supports vacation-seconds extension it is possible
@@ -107,6 +116,24 @@ $config['managesieve_vacation_interval'] = 0;
 // of these on initial vacation form creation.
 $config['managesieve_vacation_addresses_init'] = false;
 
+// Sometimes you want to always reply with mail email address
+// This option enables automatic filling of :from field on initial vacation form creation.
+$config['managesieve_vacation_from_init'] = false;
+
 // Supported methods of notify extension. Default: 'mailto'
 $config['managesieve_notify_methods'] = array('mailto');
 
+// Enables scripts RAW editor feature
+$config['managesieve_raw_editor'] = false;
+
+// Disabled actions
+// Prevent user from performing specific actions:
+// list_sets, enable_disable_set, delete_set, new_set, download_set, new_rule, delete_rule
+// Note: disabling list_sets removes the Filter sets widget from the UI and means
+//       the set defined in managesieve_script_name will always be used (and activated)
+$config['managesieve_disabled_actions'] = array();
+
+// List of hosts that support managesieve.
+// Activate managesieve for selected hosts only. If this is not set all hosts are allowed.
+// Example: $config['managesieve_allowed_hosts'] = array('host1.mydomain.com','host2.mydomain.com');
+$config['managesieve_allowed_hosts'] = null;

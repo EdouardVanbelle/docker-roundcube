@@ -44,10 +44,11 @@ _init()
 	sed -i "s/{{RANDOM_KEY}}/${HASH}/g"          /home/roundcube/config/config.inc.php
 	sed -i "s/{{HOSTNAME}}/${SERVER_HOSTNAME}/g" /home/roundcube/config/config.inc.php
 
-	service nginx    start
-	service php5-fpm start
+	service nginx      start
+	service php7.3-fpm start
+	service cron 	   start
 
-	echo nginx php5-fpm started
+	echo nginx php-fpm started
 }
 
 _run()

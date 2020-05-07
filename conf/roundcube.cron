@@ -1,0 +1,6 @@
+
+# each day clean sessions
+1 1	* * *	root	su -s /bin/bash -c "/home/roundcube/bin/gc.sh"      www-data >/dev/null 2>/dev/null
+
+# each day clean db
+2 1	* * * 	root	su -s /bin/bash -c "/home/roundcube/bin/cleandb.sh" www-data >/dev/null 2>/dev/null

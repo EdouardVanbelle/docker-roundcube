@@ -98,12 +98,15 @@ $config['plugins'] = array(
     'markasjunk',
     'managesieve',
     'newmail_notifier',
-    'attachment_reminder',
-    'zipdownload',
-    'message_label'
+    'emoticons',
+    'attachment_reminder'
 );
 
 // the default locale setting (leave empty for auto-detection)
 // RFC1766 formatted language name like en_US, de_DE, de_CH, fr_FR, pt_BR
 $config['language'] = 'fr_FR';
+
+
+// skin name: folder from skins/
+$config['skin'] = 'elastic';
 

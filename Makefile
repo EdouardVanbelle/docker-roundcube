@@ -1,5 +1,5 @@
 DOCKER=roundcube
-LOCAL=/home
+LOCAL=/data-active
 INSTANCE="${DOCKER}-instance"
 
 all: build
