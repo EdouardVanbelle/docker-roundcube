@@ -1,6 +1,7 @@
 DOCKER=roundcube
 LOCAL=/data-active
 INSTANCE="${DOCKER}-instance"
+LISTEN=`dig +short A mail.vanbelle.fr`
 
 all: build
 
@@ -12,7 +13,7 @@ build:
 
 #create container
 container: 
-	docker run -t -d -h ${DOCKER} --name "${INSTANCE}" -p 80:80 -p 443:443 -v ${LOCAL}/mail-data:/data dropz-one/${DOCKER}
+	docker run -t -d -h ${DOCKER} --name "${INSTANCE}" -p ${LISTEN}:80:80 -p ${LISTEN}:443:443 -v ${LOCAL}/mail-data:/data dropz-one/${DOCKER}
 
 start:
 	docker start ${INSTANCE}
