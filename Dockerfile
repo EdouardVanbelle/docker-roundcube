@@ -3,13 +3,16 @@ FROM debian:buster
 MAINTAINER Edouard Vanbelle <edouard@vanbelle.fr>
 
 RUN \
-	apt-get update \
-    	&& DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends \
+	echo "LANG=C" > /etc/default/locale \
+	&& apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade -q -y \
+    	&& DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
 	    apt-utils nginx vim wget sqlite3 procps zip cron \
 	    php-fpm php7.3-common php-zip php-intl php7.3-sqlite php-pear composer \
 	    php-net-smtp php-mail-mime php-net-socket php-net-idna2 php-net-sieve php-auth-sasl php-gnupg php-ldap php-gd \
             ca-certificates openssl \
 	&& apt-get clean \
+	&& apt-get autoclean \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root

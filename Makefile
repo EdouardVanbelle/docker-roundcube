@@ -9,7 +9,7 @@ all: build
 
 # build image
 build:
-	docker build -t dropz-one/${DOCKER} .
+	docker build --pull -t dropz-one/${DOCKER} .
 
 #create container
 container: 
@@ -19,6 +19,9 @@ start:
 	docker start ${INSTANCE}
 stop:
 	docker stop ${INSTANCE}
+
+clean:
+	docker container rm ${INSTANCE}
 
 enter:
 	docker exec -t -i ${INSTANCE} /bin/bash
