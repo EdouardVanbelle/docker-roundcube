@@ -6,6 +6,9 @@ server {
         ssl_certificate     /data/letsencrypt/live/enor.me/fullchain.pem;
         ssl_certificate_key /data/letsencrypt/live/enor.me/privkey.pem;
 
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_timeout 60m;
+
         # Enable OCSP Stapling, point to certificate chain
         ssl_stapling on;
         ssl_stapling_verify on;
