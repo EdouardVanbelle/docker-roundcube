@@ -1,6 +1,6 @@
 server {
 
-        listen 443 ssl;
+        listen 443 ssl http2;
         server_name vanbelle.fr www.vanbelle.fr;
 
         ssl_certificate     /data/letsencrypt/live/vanbelle.fr/fullchain.pem;

@@ -1,5 +1,5 @@
 server {
-        listen 80;
+        listen 80 default_server;
 
         access_log /data/log/roundcube/clear-access.log;
         error_log  /data/log/roundcube/clear-error.log;
