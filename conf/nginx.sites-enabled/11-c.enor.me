@@ -3,8 +3,13 @@ server {
         listen 443 ssl;
         server_name c.enor.me enor.me;
 
-        ssl_certificate     /data/config/ssl/default.pem;
-        ssl_certificate_key /data/config/ssl/default.key;
+        ssl_certificate     /data/letsencrypt/live/enor.me/fullchain.pem;
+        ssl_certificate_key /data/letsencrypt/live/enor.me/privkey.pem;
+
+        # Enable OCSP Stapling, point to certificate chain
+        ssl_stapling on;
+        ssl_stapling_verify on;
+        ssl_trusted_certificate /data/letsencrypt/live/enor.me/chain.pem;
 
         access_log /data/log/roundcube/access.log;
         error_log  /data/log/roundcube/error.log;

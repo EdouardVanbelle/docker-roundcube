@@ -10,7 +10,7 @@ server {
         location /.well-known/acme-challenge {
                 default_type "text/plain";
                 #alias /data/letsencrypt-acme/$host/;
-		root /data/letsencrypt-acme;
+		root /data/www/letsencrypt-acme;
         }
 
         location / {

@@ -3,8 +3,13 @@ server {
         listen 443 ssl;
         server_name vanbelle.fr www.vanbelle.fr;
 
-        ssl_certificate     /data/config/ssl/default.pem;
-        ssl_certificate_key /data/config/ssl/default.key;
+        ssl_certificate     /data/letsencrypt/live/vanbelle.fr/fullchain.pem;
+        ssl_certificate_key /data/letsencrypt/live/vanbelle.fr/privkey.pem;
+
+        # Enable OCSP Stapling, point to certificate chain
+        ssl_stapling on;
+        ssl_stapling_verify on;
+        ssl_trusted_certificate /data/letsencrypt/live/vanbelle.fr/chain.pem;
 
         access_log /data/log/roundcube/access.log;
         error_log  /data/log/roundcube/error.log;
