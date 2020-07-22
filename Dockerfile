@@ -7,7 +7,7 @@ RUN \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade -q -y \
     	&& DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
-	    apt-utils nginx vim wget sqlite3 procps zip cron \
+	    apt-utils nginx vim wget sqlite3 procps zip unzip cron \
 	    php-fpm php7.3-common php-zip php-intl php7.3-sqlite php-pear composer \
 	    php-net-smtp php-mail-mime php-net-socket php-net-idna2 php-net-sieve php-auth-sasl php-gnupg php-ldap php-gd \
             ca-certificates openssl certbot \
@@ -29,6 +29,7 @@ RUN \
     mkdir -p /data/logs/roundcube && \
     mkdir -p /data/cache/roundcube && \
     mv -f /home/roundcube/composer.json-dist  /home/roundcube/composer.json && \
+    rm -f /etc/nginx/sites-enabled/default && \
     if [ -e /home/roundcube/composer.lock ]; then su roundcube -c "cd /home/roundcube; /usr/bin/composer update --no-dev"; else su roundcube -c "cd /home/roundcube; /usr/bin/composer install --no-dev"; fi  && \
     touch /etc/in-docker
 

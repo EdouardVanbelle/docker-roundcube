@@ -14,8 +14,8 @@ server {
         ssl_stapling_verify on;
         ssl_trusted_certificate /data/letsencrypt/live/enor.me/chain.pem;
 
-        access_log /data/log/roundcube/access.log;
-        error_log  /data/log/roundcube/error.log;
+        access_log /data/log/roundcube/enor.me.access.log;
+        error_log  /data/log/roundcube/enor.me.error.log;
 
         # tell browser to continue only in HTTPS
         add_header Strict-Transport-Security "max-age=31536000";
