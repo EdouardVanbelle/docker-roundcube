@@ -1,0 +1,18 @@
+server {
+
+        listen 443 ssl;
+        server_name vanbelle.fr www.vanbelle.fr;
+
+        ssl_certificate     /data/config/ssl/default.pem;
+        ssl_certificate_key /data/config/ssl/default.key;
+
+        access_log /data/log/roundcube/access.log;
+        error_log  /data/log/roundcube/error.log;
+
+        # tell browser to continue only in HTTPS
+        add_header Strict-Transport-Security "max-age=31536000";
+
+        root /data/www/vanbelle.fr;
+        index index.php index.html index.htm;
+
+}

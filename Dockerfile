@@ -30,9 +30,10 @@ RUN \
     mkdir -p /data/cache/roundcube && \
     mv -f /home/roundcube/composer.json-dist  /home/roundcube/composer.json && \
     if [ -e /home/roundcube/composer.lock ]; then su roundcube -c "cd /home/roundcube; /usr/bin/composer update --no-dev"; else su roundcube -c "cd /home/roundcube; /usr/bin/composer install --no-dev"; fi  && \
+    mkdir /home/vanbelle.fr && \
     touch /etc/in-docker
 
-ADD conf/nginx.conf     		     /etc/nginx/sites-enabled/default
+ADD conf/nginx     		     	     /etc/nginx/sites-enabled
 # TODO: could configure php-fpm roundcube pool
 ADD conf/phpfpm-roundcube-conf.ini	     /etc/php/7.3/fpm/conf.d/80-roundcube.ini
 
