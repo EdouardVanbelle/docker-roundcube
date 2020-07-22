@@ -10,7 +10,7 @@ RUN \
 	    apt-utils nginx vim wget sqlite3 procps zip cron \
 	    php-fpm php7.3-common php-zip php-intl php7.3-sqlite php-pear composer \
 	    php-net-smtp php-mail-mime php-net-socket php-net-idna2 php-net-sieve php-auth-sasl php-gnupg php-ldap php-gd \
-            ca-certificates openssl \
+            ca-certificates openssl certbot \
 	&& apt-get clean \
 	&& apt-get autoclean \
 	&& rm -rf /var/lib/apt/lists/*
