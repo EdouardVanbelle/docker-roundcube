@@ -22,8 +22,8 @@ WORKDIR /root
 RUN \
     groupadd -g 5001 roundcube && \
     useradd -g roundcube -u 5001 roundcube -d /home/roundcube -M && \
-    wget -q https://github.com/roundcube/roundcubemail/releases/download/1.4.4/roundcubemail-1.4.4-complete.tar.gz -O - | tar -xz && \
-    mv /root/roundcubemail-1.4.4 /home/roundcube && \
+    wget -q https://github.com/roundcube/roundcubemail/releases/download/1.4.9/roundcubemail-1.4.9-complete.tar.gz -O - | tar -xz && \
+    mv /root/roundcubemail-1.4.9 /home/roundcube && \
     rm -fr /home/roundcube/installer && \
     chown -R roundcube: /home/roundcube && \ 
     mkdir -p /data/logs/roundcube && \
@@ -31,6 +31,7 @@ RUN \
     mv -f /home/roundcube/composer.json-dist  /home/roundcube/composer.json && \
     rm -f /etc/nginx/sites-enabled/default && \
     if [ -e /home/roundcube/composer.lock ]; then su roundcube -c "cd /home/roundcube; /usr/bin/composer update --no-dev"; else su roundcube -c "cd /home/roundcube; /usr/bin/composer install --no-dev"; fi  && \
+    mv -f /etc/letsencrypt /etc/letsencrypt.old && ln -s /data/letsencrypt /etc/letsencrypt && \
     touch /etc/in-docker
 
 ADD conf/nginx.sites-enabled	     	     /etc/nginx/sites-enabled
