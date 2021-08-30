@@ -17,7 +17,7 @@ move:
 
 #create container
 container: 
-	docker run -t -d -h ${DOCKER} --env TZ=${TIMEZONE} --name "${INSTANCE}" -p ${LISTEN}:80:80 -p ${LISTEN}:443:443 -v ${LOCAL}/mail-data:/data dropz-one/${DOCKER}
+	docker run -t -d -h ${DOCKER} --restart=unless-stopped --env TZ=${TIMEZONE} --name "${INSTANCE}" -p ${LISTEN}:80:80 -p ${LISTEN}:443:443 -v ${LOCAL}/mail-data:/data dropz-one/${DOCKER}
 	docker network connect web-net ${INSTANCE}
 
 start:
