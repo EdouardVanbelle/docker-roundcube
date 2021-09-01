@@ -8,7 +8,7 @@ RUN \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get upgrade -q -y \
     	&& DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
-	    apt-utils nginx vim wget sqlite3 procps zip unzip cron \
+	    apt-utils nginx vim wget sqlite3 procps zip unzip cron curl \
 	    php-fpm php7.4-common php-zip php-intl php7.4-sqlite php-pear composer \
 	    php-net-smtp php-mail-mime php-net-socket php-net-sieve php-auth-sasl php-gnupg php-ldap php-gd \
             ca-certificates openssl certbot \
@@ -58,5 +58,8 @@ ADD scripts/manage       		     /usr/local/bin/manage
 VOLUME /data
 
 EXPOSE 80 443
+
+# FIXME: implement it @see: https://dzone.com/articles/health-checking-your-docker-containers
+HEALTHCHECK --interval=30s --timeout=3s CMD curl --silent --show-error --fail --user-agent "healthcheck" --connect-to "mail.vanbelle.fr:443:127.0.0.1:443" https://mail.vanbelle.fr/ -o /dev/null || exit 1
 
 ENTRYPOINT [ "/usr/local/bin/manage", "_run" ]
