@@ -123,8 +123,12 @@ $config['plugins'] = array(
     'managesieve',
     'newmail_notifier',
     'emoticons',
-    'attachment_reminder'
+    'attachment_reminder',
+    'show_additional_headers'
 );
+
+//display X-Original-To whne expanding headers in message view
+$config['show_additional_headers'] = ['X-Original-To'];
 
 // the default locale setting (leave empty for auto-detection)
 // RFC1766 formatted language name like en_US, de_DE, de_CH, fr_FR, pt_BR
