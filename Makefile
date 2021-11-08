@@ -17,9 +17,18 @@ move:
 	docker container rename ${INSTANCE} ${INSTANCE}.old
 
 #create container
+#--network bridge 
 container: 
-	docker run -t -d -h ${DOCKER} --restart=unless-stopped --env TZ=${TIMEZONE} --name "${INSTANCE}" -p ${LISTEN}:80:80 -p ${LISTEN}:443:443 -v ${LOCAL}/mail-data:/data dropz-one/${DOCKER}:${VERSION}
-	docker network connect web-net ${INSTANCE}
+	docker run -t -d -h ${DOCKER} --restart=unless-stopped --env TZ=${TIMEZONE} --name "${INSTANCE}"  \
+		-v ${LOCAL}/mail-data:/data \
+		--label 'traefik.enable=true' \
+		--label 'traefik.http.routers.roundcube-secure.rule=Host(`mail.vanbelle.fr`)' \
+		--label 'traefik.http.routers.roundcube-secure.entrypoints=websecure' \
+		--label 'traefik.http.services.roundcube.loadbalancer.server.port=80' \
+		--network web-net \
+		dropz-one/${DOCKER}:${VERSION}
+		
+#	-p ${LISTEN}:80:80 -p ${LISTEN}:443:443 
 
 start:
 	docker start ${INSTANCE}
