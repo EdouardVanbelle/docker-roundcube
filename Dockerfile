@@ -18,7 +18,7 @@ RUN \
 
 WORKDIR /root
 
-ENV ROUNDCUBE_VERSION=1.4.11
+ENV ROUNDCUBE_VERSION=1.5.2
 
     #wget -q https://downloads.sourceforge.net/project/roundcubemail/roundcubemail/1.1.3/roundcubemail-1.1.3-complete.tar.gz -O - | tar -xz && \
 # when roundcube grows older, change version in the download link, but also in the 'mv' command
@@ -36,8 +36,8 @@ RUN \
     rm -f /etc/nginx/sites-enabled/default && \
     su roundcube -c "cd /home/roundcube; rm -rf vendor; rm -f composer.lock; /usr/bin/composer clear-cache" && \
     if [ -e /home/roundcube/composer.lock ]; then su roundcube -c "cd /home/roundcube; /usr/bin/composer update --no-dev"; else su roundcube -c "cd /home/roundcube; /usr/bin/composer install --no-dev"; fi  && \
-    mv -f /etc/letsencrypt /etc/letsencrypt.old && ln -s /data/letsencrypt /etc/letsencrypt && \
     touch /etc/in-docker
+#mv -f /etc/letsencrypt /etc/letsencrypt.old && ln -s /data/letsencrypt /etc/letsencrypt && \
 
 ADD conf/nginx.sites-enabled	     	     /etc/nginx/sites-enabled
 ADD conf/nginx.conf		     	     /etc/nginx/conf.d

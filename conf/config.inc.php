@@ -17,7 +17,7 @@
  +-----------------------------------------------------------------------+
 */
 
-$config = array();
+$config = [];
 
 // Database connection string (DSN) for read+write operations
 // Format (compatible with PEAR MDB2): db_provider://user:password@host/database
@@ -116,7 +116,7 @@ $config['temp_dir'] = '/tmp';
 // PLUGINS
 // ----------------------------------
 // List of active plugins (in plugins/ directory)
-$config['plugins'] = array(
+$config['plugins'] = [
     'archive',
     'zipdownload',
     'markasjunk',
@@ -125,7 +125,7 @@ $config['plugins'] = array(
     'emoticons',
     'attachment_reminder',
     'show_additional_headers'
-);
+];
 
 //display X-Original-To whne expanding headers in message view
 $config['show_additional_headers'] = ['X-Original-To'];
