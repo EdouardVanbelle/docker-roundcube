@@ -18,7 +18,7 @@ RUN \
 
 WORKDIR /root
 
-ENV ROUNDCUBE_VERSION=1.5.2
+ENV ROUNDCUBE_VERSION=1.5.3
 
     #wget -q https://downloads.sourceforge.net/project/roundcubemail/roundcubemail/1.1.3/roundcubemail-1.1.3-complete.tar.gz -O - | tar -xz && \
 # when roundcube grows older, change version in the download link, but also in the 'mv' command

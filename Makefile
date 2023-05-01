@@ -25,6 +25,7 @@ container:
 		--label 'traefik.http.routers.roundcube-secure.rule=Host(`mail.vanbelle.fr`)' \
 		--label 'traefik.http.routers.roundcube-secure.entrypoints=websecure' \
 		--label 'traefik.http.services.roundcube.loadbalancer.server.port=80' \
+		--label 'traefik.docker.network=web-net' \
 		--network web-net \
 		dropz-one/${DOCKER}:${VERSION}
 		
