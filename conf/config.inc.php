@@ -38,7 +38,7 @@ $config['db_dsnw'] = 'sqlite:////data/cache/roundcube/db.sqlite?mode=0640';
 // %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
 // %s - domain name after the '@' from e-mail address provided at login screen
 // For example %n = mail.domain.tld, %t = domain.tld
-$config['default_host'] = 'tls://{{HOSTNAME}}:143';
+$config['imap_host'] = 'tls://{{HOSTNAME}}:143';
 
 // SMTP server host (for sending mails).
 // Enter hostname with prefix ssl:// to use Implicit TLS, or use
@@ -50,12 +50,8 @@ $config['default_host'] = 'tls://{{HOSTNAME}}:143';
 // %d - domain (http hostname $_SERVER['HTTP_HOST'] without the first part)
 // %z - IMAP domain (IMAP hostname without the first part)
 // For example %n = mail.domain.tld, %t = domain.tld
-//$config['smtp_server'] = 'localhost';
-$config['smtp_server'] = 'tls://%h:587';
+$config['smtp_host'] = 'tls://%h:587';
 
-
-// SMTP port. Use 25 for cleartext, 465 for Implicit TLS, or 587 for STARTTLS (default)
-$config['smtp_port'] = 587;
 
 // required to ignore SSL cert. verification
 // see: https://bbs.archlinux.org/viewtopic.php?id=187063

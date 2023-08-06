@@ -2,7 +2,7 @@
 
 // managesieve server port. When empty the port will be determined automatically
 // using getservbyname() function, with 4190 as a fallback.
-$config['managesieve_port'] = null;
+// $config['managesieve_port'] = null;
 
 // managesieve server address, default is localhost.
 // Replacement variables supported in host name:
