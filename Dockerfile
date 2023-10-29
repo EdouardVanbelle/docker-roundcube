@@ -19,7 +19,7 @@ RUN \
 
 WORKDIR /root
 
-ENV ROUNDCUBE_VERSION=1.6.2
+ENV ROUNDCUBE_VERSION=1.6.4
 # After a new version upgraded please run: su -s /bin/bash www-data -c "cd /home/roundcube; ./bin/update.sh"
 
 
@@ -51,8 +51,10 @@ ADD conf/emoticons-config.inc.php	     /home/roundcube/plugins/emoticons/config.
 ADD conf/config.inc.php 		     /home/roundcube/config/config.inc.php
 
 ADD conf/roundcube.cron			     /etc/cron.d/roundcube
+ADD conf/cron.weekly/rotate                  /etc/cron.weekly/rotate
 
 ADD scripts/manage       		     /usr/local/bin/manage
+ADD scripts/rotate	   		     /usr/local/bin/rotate
 
 VOLUME /data
 

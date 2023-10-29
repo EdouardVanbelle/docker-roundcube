@@ -1,0 +1,60 @@
+#!/bin/bash
+
+test -e /.dockerenv || { echo "must be runned in docker container"; exit 1; }
+
+for FILE in /data/log/roundcube/mail.vanbelle.fr.*.log
+do
+
+	test -e $FILE       || { echo "$FILE not found"; exit 1; }
+
+	NOW=$(date +'%Y-%m-%d')
+
+	if test -e $FILE.$NOW.gz
+	then
+		echo $FILE.$NOW.gz already exists
+		continue
+	fi
+
+	if test -e $FILE.$NOW
+	then
+		echo $FILE.$NOW already exists
+		continue
+	fi
+
+	echo creating $FILE.$NOW.gz
+
+	mv $FILE $FILE.$NOW
+	kill -USR1 $(cat /var/run/nginx.pid)
+	gzip -9 $FILE.$NOW
+done
+
+for FILE in /data/log/roundcube/{errors,sendmail}.log
+do
+
+	test -e $FILE       || { echo "$FILE not found"; exit 1; }
+
+	NOW=$(date +'%Y-%m-%d')
+
+	if test -e $FILE.$NOW.gz
+	then
+		echo $FILE.$NOW.gz already exists
+		continue
+	fi
+
+	if test -e $FILE.$NOW
+	then
+		echo $FILE.$NOW already exists
+		continue
+	fi
+
+	echo creating $FILE.$NOW.gz
+
+	mv $FILE $FILE.$NOW
+
+	# gracefull reload fpm daemons
+	kill -USR2 $(cat /var/run/php/php8.2-fpm.pid)
+
+	gzip -9 $FILE.$NOW
+done
+
+

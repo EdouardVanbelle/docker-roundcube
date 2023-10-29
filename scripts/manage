@@ -54,7 +54,7 @@ _init()
 _run()
 {
         _init
-	tail -F  /data/log/roundcube/*
+	tail -F  /data/log/roundcube/*.log
 }
 
 shell()
