@@ -52,7 +52,7 @@ do
 	mv $FILE $FILE.$NOW
 
 	# gracefull reload fpm daemons
-	kill -USR2 $(cat /var/run/php/php8.2-fpm.pid)
+	kill -USR2 $(cat /var/run/php/php8.4-fpm.pid)
 
 	gzip -9 $FILE.$NOW
 done

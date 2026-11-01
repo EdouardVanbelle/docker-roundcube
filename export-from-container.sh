@@ -1,3 +1,8 @@
 #!/bin/sh
 
-docker container export roundcube-instance | tar -xO home/roundcube/plugins/managesieve/config.inc.php > conf/managesieve.config.inc.php.LIVE
+echo diff are located in
+docker inspect -f '{{.GraphDriver.Data.UpperDir}}' mail-roundcube
+
+exit
+
+docker container export mail-roundcube | tar -xO home/roundcube/config/config.inc.php > conf/config.inc.php.LIVE
